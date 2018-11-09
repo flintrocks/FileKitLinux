@@ -27,22 +27,7 @@
 
 import Foundation
 
-/// A representation of a filesystem data file.
-///
-/// The data type is NSData.
-public typealias NSDataFile = File<NSData>
-
 extension File where DataType: NSData {
-
-    /// Reads the file and returns its data.
-    /// - Parameter options: A mask that specifies write options
-    ///                      described in `NSData.ReadingOptions`.
-    ///
-    /// - Throws: `FileKitError.ReadFromFileFail`
-    /// - Returns: The data read from file.
-    public func read(_ options: NSData.ReadingOptions) throws -> NSData {
-        return try NSData.read(from: path, options: options)
-    }
 
     /// Writes data to the file.
     ///

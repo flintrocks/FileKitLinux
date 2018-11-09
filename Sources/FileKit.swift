@@ -64,10 +64,6 @@ public struct FileKit {
     public static var jsonDecoder = JSONDecoder()
     /// Shared json encoder instance
     public static var jsonEncoder = JSONEncoder()
-    /// Shared property list decoder instance
-    public static var propertyListDecoder = PropertyListDecoder()
-    /// Shared property list encoder instance
-    public static var propertyListEncoder = PropertyListEncoder()
 
 }
 

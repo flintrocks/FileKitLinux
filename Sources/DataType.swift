@@ -41,18 +41,6 @@ public protocol Readable {
 
 }
 
-extension Readable {
-
-    /// Initializes `self` from the contents of a Path.
-    ///
-    /// - Parameter path: The path being read from.
-    ///
-    public init(contentsOfPath path: Path) throws { // swiftlint:disable:this valid_docs
-        self = try Self.read(from: path)
-    }
-
-}
-
 /// A type that can be used to write to File instances.
 public protocol Writable {
 

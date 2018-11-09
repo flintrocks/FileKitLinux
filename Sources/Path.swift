@@ -68,12 +68,10 @@ public struct Path {
     fileprivate class _FMWrapper {
         let unsafeFileManager = FileManager()
         weak var delegate: FileManagerDelegate?
+
         /// Safe way to use fileManager
         var fileManager: FileManager {
-            //if delegate == nil {
-            //   print("\n\nDelegate is nil\n\n")
-            //}
-            unsafeFileManager.delegate = delegate
+//            unsafeFileManager.delegate = delegate
             return unsafeFileManager
         }
     }
@@ -961,52 +959,6 @@ extension Path {
     /// - Returns: The `Path` objects url.
     public var url: URL {
         return URL(fileURLWithPath: _safeRawValue, isDirectory: self.isDirectory)
-    }
-
-}
-
-extension Path {
-
-    // MARK: - BookmarkData
-
-    /// Creates a new path with given url if possible.
-    ///
-    /// - Parameter bookmarkData: The bookmark data to create a path for.
-    public init?(bookmarkData bookData: Data) {
-        var isStale: ObjCBool = false
-        let url = try? (NSURL(
-            resolvingBookmarkData: bookData,
-            options: [],
-            relativeTo: nil,
-            bookmarkDataIsStale: &isStale) as URL)
-        guard let fullURL = url else {
-            return nil
-        }
-        self.init(url: fullURL)
-    }
-
-    /// - Returns: The `Path` objects bookmarkData.
-    public var bookmarkData: Data? {
-        return try? url.bookmarkData(
-            options: .suitableForBookmarkFile,
-            includingResourceValuesForKeys: nil,
-            relativeTo: nil)
-    }
-
-}
-
-extension Path {
-
-    // MARK: - SecurityApplicationGroupIdentifier
-
-    /// Returns the container directory associated with the specified security application group ID.
-    ///
-    /// - Parameter groupIdentifier: The group identifier.
-    public init?(groupIdentifier: String) {
-        guard let url = FileManager().containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier) else {
-            return nil
-        }
-        self.init(url: url)
     }
 
 }
